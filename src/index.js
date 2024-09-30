@@ -23,6 +23,4 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 route(app);
 
 // Bắt đầu server
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+app.listen(port, () => { console.log(`Server is running at http://localhost:${port}`); });
