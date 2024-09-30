@@ -2,9 +2,10 @@
   "name": "nodejs_project",
   "version": "1.0.0",
   "description": "nodejs",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon --inspect src/index.js",
+    "watch": "node-sass --watch src/resources/scss --output src/public/css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,9 +24,12 @@
   },
   "homepage": "https://github.com/haicode03/nodejs_hai#readme",
   "dependencies": {
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "express-handlebars": "^8.0.1"
   },
   "devDependencies": {
+    "morgan": "^1.10.0",
+    "node-sass": "^9.0.0",
     "nodemon": "^3.1.7"
   }
 }
