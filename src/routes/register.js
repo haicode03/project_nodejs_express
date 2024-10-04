@@ -4,7 +4,7 @@ const registerController = require('../app/controllers/RegisterController');
 
 // Hiển thị trang đăng ký
 router.get('/', (req, res) => {
-    res.render('register'); 
+    res.render('register', {layout: 'auth', title: 'Đăng ký'}); 
 });
 
 // Xử lý đăng ký

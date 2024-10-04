@@ -2,7 +2,7 @@ const Course = require('../models/Course');
 const { mongooseToObject } = require('../../util/mongoose');
 
 class CourseController {
-    // [GET] /courses/:slug
+    // Hiển thị chi tiết khóa học
     show(req, res, next) {
         Course.findOne({ slug: req.params.slug })
             .then((course) =>
@@ -13,22 +13,21 @@ class CourseController {
             .catch(next);
     }
 
-    // [GET] /courses/create
-    create(req, res, next) {
+    // Tạo khóa học mới
+    create(req, res) {
         res.render('courses/create');
     }
 
-    // [POST] /courses/store
+    // Lưu khóa học vào cơ sở dữ liệu
     store(req, res, next) {
         req.body.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
         const course = new Course(req.body);
-        course
-            .save()
+        course.save()
             .then(() => res.redirect('/me/stored/courses'))
-            .catch((error) => {});
+            .catch(next);
     }
 
-    // [GET] /courses/:id/edit
+    // Chỉnh sửa khóa học
     edit(req, res, next) {
         Course.findById(req.params.id)
             .then((course) =>
@@ -39,28 +38,28 @@ class CourseController {
             .catch(next);
     }
 
-    // [PUT] /courses/:id
+    // Cập nhật khóa học
     update(req, res, next) {
         Course.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/me/stored/courses'))
             .catch(next);
     }
 
-    // [DELETE] /courses/:id
+    // Xóa khóa học tạm thời
     destroy(req, res, next) {
         Course.delete({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }
 
-    // [DELETE] /courses/:id/force
+    // Xóa vĩnh viễn khóa học
     forceDestroy(req, res, next) {
         Course.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }
 
-    // [PATCH] /courses/:id/restore
+    // Khôi phục khóa học
     restore(req, res, next) {
         Course.restore({ _id: req.params.id })
             .then(() => res.redirect('back'))

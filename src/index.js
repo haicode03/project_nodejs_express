@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
-const handlebars = require('express-handlebars');
+const expressHandlebars = require('express-handlebars');  // Đảm bảo require đúng thư viện
 
 const route = require('./routes');
 const db = require('./config/db');
@@ -29,15 +29,14 @@ app.use(methodOverride('_method'));
 // app.use(morgan('combined'));
 
 // Template engine
-app.engine(
-    'hbs',
-    handlebars({
-        extname: '.hbs',
-        helpers: {
-            sum: (a, b) => a + b,
-        },
-    }),
-);
+const hbs = expressHandlebars.create({
+    extname: '.hbs',
+    helpers: {
+        sum: (a, b) => a + b,
+    },
+});
+
+app.engine('hbs', hbs.engine);  // Sử dụng hbs.engine
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));
 
