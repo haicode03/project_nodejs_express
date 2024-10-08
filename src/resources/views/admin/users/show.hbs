@@ -1,0 +1,283 @@
+<div class="container">
+  <div class="page-inner">
+    <div class="page-header">
+      <h3 class="fw-bold mb-3">Quản lý tài khoản</h3>
+      <ul class="breadcrumbs mb-3">
+        <li class="nav-home">
+          <a href="/">
+            <i class="icon-home"></i>
+          </a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+        <li class="nav-item">
+          <a href="/admin/users/show">Danh sách tài khoản</a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+        {{!-- <li class="nav-item">
+          <a href="#">Basic Tables</a>
+        </li> --}}
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        {{!-- <div class="card">
+          <div class="card-header">
+            <div class="card-title">Hoverable Table</div>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Handle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td colspan="2">Larry the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Bordered Table</div>
+          </div>
+          <div class="card-body">
+            <div class="card-sub">
+              Add
+              <code class="highlighter-rouge">.table-bordered</code> to
+              create a bordered table
+            </div>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Handle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td colspan="2">Larry the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="card-sub">
+              You can also add
+              <code class="highlighter-rouge"
+                >.table-bordered-bd-*states</code
+              >
+              to change the border color of the table
+            </div>
+            <table
+              class="table table-bordered table-bordered-bd-warning mt-4"
+            >
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Handle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td colspan="2">Larry the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="card-sub">
+              It can also add
+              <code class="highlight-rouge"
+                >.table-head-bg-*states</code
+              >
+              so that the table header has the same color as the border
+              color of the table
+            </div>
+            <table
+              class="table table-bordered table-head-bg-info table-bordered-bd-info mt-4"
+            >
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Handle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td colspan="2">Larry the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div> --}}
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="card-title">Danh sách tài khoản</div>
+            <a href="/admin/users/create" type="button" class="btn btn-success">Thêm tài khoản</a>
+          </div>
+          <!-- SweetAlert JS -->
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          <script>
+              // Kiểm tra nếu có thông báo thành công
+              const successMessage = '{{successMessage}}';
+              const errorMessage = '{{errorMessage}}';
+
+              if (successMessage) {
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Thành công',
+                      text: successMessage,
+                  });
+              }
+
+              if (errorMessage) {
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Lỗi',
+                      text: errorMessage,
+                  });
+              }
+          </script>
+          <div class="card-body">
+            <table class="table table-head-bg-primary">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Tên người dùng</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Vai trò</th>
+                  <th scope="col">Chức năng</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {{#each users}}
+                <tr>
+                  <th scope="row">{{sum @index 1}}</th>
+                  <td>{{this.username}}</td>
+                  <td>{{this.email}}</td>
+                  <td>{{this.role}}</td>
+                  <td>
+                    <a href="/admin/users/{{this._id}}/edit" class="btn btn-info">Sửa</a>
+                    <a class="btn btn-danger" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#delete-course-modal">Xóa</a>
+                </td>
+                </tr>
+                 {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Confirm delete course --}}
+<div class="modal fade" id="delete-course-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa tài khoản?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn chắc chắn muốn xóa tài khoản này?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button id="btn-delete-course" type="button" class="btn btn-danger">Xóa bỏ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete hidden form --}}
+<form name="delete-course-form" method="POST"></form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var userId;
+        var deleteForm = document.forms['delete-course-form'];
+        var btnDeleteUser = document.getElementById('btn-delete-course');
+
+        // When dialog confirm clicked
+        $('#delete-course-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            userId = button.data('id');
+        });
+        
+        // When delete course btn clicked
+        btnDeleteUser.onclick = function () {
+            deleteForm.action = '/admin/users/' + userId + '?_method=DELETE';
+            deleteForm.submit();
+        }
+    });
+</script>

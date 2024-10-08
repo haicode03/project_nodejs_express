@@ -16,6 +16,7 @@ class CourseController {
     // Tạo khóa học mới
     create(req, res) {
         res.render('courses/create');
+        
     }
 
     // Lưu khóa học vào cơ sở dữ liệu
