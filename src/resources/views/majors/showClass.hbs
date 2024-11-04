@@ -1,0 +1,124 @@
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Danh sách lớp biên chế của {{faculties.name}}</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="/">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/majors/show">Danh sách ngành</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/classes/show">Danh sách lớp biên chế</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="card-title">Danh sách lớp biên chế</div>
+                        <div class="ms-auto">
+                            <a href="/classes/create" type="button" class="btn btn-success">Thêm thông tin</a>
+                            <a href="/classes/import" type="button" class="btn btn-warning">Import</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Lớp biên chế được phân theo ngành - khoa
+                        </div>
+                        <table class="table table-striped mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Tên lớp</th>
+                                    <th scope="col">Thuộc ngành</th>
+                                    <th scope="col">Khóa</th>
+                                    <th scope="col">Xem chi tiết</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each classes}}
+                                <tr>
+                                    <th scope="row">{{sum @index 1}}</th>
+                                    <td>{{ this.name }}</td>
+                                    <td>{{ this.major_id }}</td>
+                                    <td>{{ this.academic_year }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-info view-class" data-class-id="{{this._id}}" data-bs-toggle="modal" data-bs-target="#studentModal">
+                                            Xem danh sách
+                                        </button>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="studentModalLabel">Danh sách sinh viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul id="student-list" class="list-group">
+                    <!-- Danh sách sinh viên sẽ được thêm vào đây -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("studentModal");
+    const studentList = document.getElementById("student-list");
+
+    document.querySelectorAll(".view-class").forEach(button => {
+        button.addEventListener("click", function() {
+            const class_id = this.getAttribute("data-class-id");
+
+            // Xóa danh sách sinh viên cũ
+            studentList.innerHTML = "";
+
+            // Lấy dữ liệu sinh viên cho lớp từ API hoặc route server
+            fetch(`/classes/${class_id}/students`)
+                .then(response => response.json())
+                .then(data => {
+                    // Tạo các phần tử sinh viên trong modal
+                    data.forEach(student => {
+                        const listItem = document.createElement("li");
+                        listItem.className = "list-group-item";
+                        listItem.textContent = `${student.name} - ${student._id}`;
+                        studentList.appendChild(listItem);
+                    });
+                })
+                .catch(error => {
+                    console.error("Lỗi khi lấy danh sách sinh viên:", error);
+                    studentList.innerHTML = "<li class='list-group-item text-danger'>Không thể tải danh sách sinh viên</li>";
+                });
+        });
+    });
+});
+</script>

@@ -3,6 +3,18 @@ const { mutipleMongooseToObject } = require('../../util/mongoose');
 const { mongooseToObject } = require('../../util/mongoose');
 
 class AdminController {
+    showDashboard(req, res, next) {
+        const userRole = req.user.role;
+
+        if (userRole === 'student') {
+            return res.render('student/');
+        } else if (userRole === 'teacher') {
+            return res.render('teacher/');
+        } else {
+            return res.render('admin/');
+        }
+    }
+
     // Hiển thị danh sách tài khoản
     show(req, res, next) {
         User.find({})

@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Danh sách Khoa của {{institute.name}}</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="/">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/institutes/show">Danh sách viện</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/departments/show">Danh sách khoa</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            {{#each departments}}
+            <div class="col-md-4">
+                <div class="card card-secondary">
+                    <div class="card-body skew-shadow">
+                        <h2>
+                            <a class="hover-name" href="/departments/{{this.slug}}">{{this.name}}</a>
+                        </h2>
+                        <p style="color: rgb(228, 188, 12);" class="op-8">Trưởng khoa: {{this.head}}</p>
+                        <div class="pull-right">
+                            <h3 class="fw-bold op-8">{{this.email}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

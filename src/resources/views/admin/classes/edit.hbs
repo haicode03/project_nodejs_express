@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="page-inner">
+    <div class="page-header">
+      <h3 class="fw-bold mb-3">Quản lý lớp biên chế</h3>
+      <ul class="breadcrumbs mb-3">
+        <li class="nav-home">
+          <a href="/">
+            <i class="icon-home"></i>
+          </a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+        <li class="nav-item">
+          <a href="#">Chỉnh sửa thông tin</a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Chỉnh sửa thông tin</div>
+          </div>
+          <div class="card-body">
+            <form class="mt-4" method="POST" action="/admin/classes/{{class._id}}?_method=PUT">
+                <div class="form-group">
+                    <label for="name">Tên lớp</label>
+                    <input type="text" class="form-control" value="{{class.name}}" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="major">Chuyên ngành</label>
+                    <input type="text" class="form-control" value="{{class.major_id}}" id="major" name="major">
+                </div>
+                <div class="form-group">
+                    <label   label for="academic_year">Khóa học</label>
+                    <input type="text" class="form-control" value="{{class.academic_year}}" id="academic_year" name="academic_year">
+                </div>
+                <div class="form-group mb-4">
+                    <select style="background-color: #63b2ca;" class="form-select-lg" id="role" name="role">
+                        <option style="background-color: #7e979e;" value="" disabled selected>Chức vụ</option>
+                        <option style="background-color: #7e979e;" value="teacher">Giảng viên</option>
+                        <option style="background-color: #7e979e;" value="student">Sinh viên</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success">Lưu lại</button>
+                <a href="/admin/classes/show" class="btn btn-warning">Quay lại</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

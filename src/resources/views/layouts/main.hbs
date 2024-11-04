@@ -1,551 +1,312 @@
-{{!-- <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/app.css">
-    </head>
-
-    <body>
-        <div class="app">
-            {{> header}}
-
-            <div class="container">
-                {{{body}}}
-            </div>
-            
-            {{> footer}}
-        </div>
-
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </body>
-</html> --}}
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>QLDA</title>
-    <meta
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-      name="viewport"
-    />
-    <link
-      rel="icon"
-      href="/assets/img/kaiadmin/favicon.ico"
-      type="image/x-icon"
-    />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>QLDA</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" href="/assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
 
-    <!-- Fonts and icons -->
-    <script src="/assets/js/plugin/webfont/webfont.min.js"></script>
-    <script>
-      WebFont.load({
-        google: { families: ["Public Sans:300,400,500,600,700"] },
-        custom: {
-          families: [
-            "Font Awesome 5 Solid",
-            "Font Awesome 5 Regular",
-            "Font Awesome 5 Brands",
-            "simple-line-icons",
-          ],
-          urls: ["/assets/css/fonts.min.css"],
-        },
-        active: function () {
-          sessionStorage.fonts = true;
-        },
-      });
-    </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/assets/css/plugins.min.css" />
-    <link rel="stylesheet" href="/assets/css/kaiadmin.min.css" />
-    <link rel="stylesheet" href="/css/app.css">
+  <!-- Fonts and icons -->
+  <script src="/assets/js/plugin/webfont/webfont.min.js"></script>
+  <script>
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: [
+          "Font Awesome 5 Solid",
+          "Font Awesome 5 Regular",
+          "Font Awesome 5 Brands",
+          "simple-line-icons",
+        ],
+        urls: ["/assets/css/fonts.min.css"],
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      },
+    });
+  </script>
 
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="/assets/css/demo.css" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <!-- Sidebar -->
-      <div class="sidebar" data-background-color="dark">
-        <div class="sidebar-logo">
-          <!-- Logo Header -->
-          <div class="logo-header" data-background-color="dark">
-            <a href="/" class="logo">
-              <img
-                src="/assets/img/kaiadmin/logo_light.svg"
-                alt="navbar brand"
-                class="navbar-brand"
-                height="20"
-              />
-            </a>
-            <div class="nav-toggle">
-              <button class="btn btn-toggle toggle-sidebar">
-                <i class="gg-menu-right"></i>
-              </button>
-              <button class="btn btn-toggle sidenav-toggler">
-                <i class="gg-menu-left"></i>
-              </button>
-            </div>
-            <button class="topbar-toggler more">
-              <i class="gg-more-vertical-alt"></i>
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/assets/css/plugins.min.css" />
+  <link rel="stylesheet" href="/assets/css/kaiadmin.min.css" />
+  <link rel="stylesheet" href="/css/app.css">
+
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link rel="stylesheet" href="/assets/css/demo.css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar" data-background-color="dark">
+      <div class="sidebar-logo">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="dark">
+          <a href="/" class="logo">
+            <img src="/assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20" />
+          </a>
+          <div class="nav-toggle">
+            <button class="btn btn-toggle toggle-sidebar">
+              <i class="gg-menu-right"></i>
+            </button>
+            <button class="btn btn-toggle sidenav-toggler">
+              <i class="gg-menu-left"></i>
             </button>
           </div>
-          <!-- End Logo Header -->
+          <button class="topbar-toggler more">
+            <i class="gg-more-vertical-alt"></i>
+          </button>
         </div>
-        <div class="sidebar-wrapper scrollbar scrollbar-inner">
-          <div class="sidebar-content">
-            <ul class="nav nav-secondary">
-              <li class="nav-item active">
-                <a
-                  data-bs-toggle="collapse"
-                  href="#"
-                  class="collapsed"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-home"></i>
-                  <p>Tổng quan</p>
-                </a>
-                
-              </li>
-              <li class="nav-section">
-                <span class="sidebar-mini-icon">
-                  <i class="fa fa-ellipsis-h"></i>
-                </span>
-                <h4 class="text-section">Các thành phần</h4>
-              </li>
+        <!-- End Logo Header -->
+      </div>
+      <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+          <ul class="nav nav-secondary">
+            <li class="nav-item active">
+              <a data-bs-toggle="collapse" href="/admin/users/show" class="collapsed" aria-expanded="false">
+                <i class="fas fa-home"></i>
+                <p>Tổng quan</p>
+              </a>
 
-                <!-- Danh sách khoa & Viện -->
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#base">
-                  <i class="fas fa-layer-group"></i>
-                  <p>Quản lý Khoa & Viện</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="base">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="components/avatars.html">
-                        <span class="sub-item">Danh sách các khoa</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="components/buttons.html">
-                        <span class="sub-item">Danh sách lớp biên chế</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarLayouts">
-                  <i class="fas fa-th-list"></i>
-                  <p>Quản lý tài khoản</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="sidebarLayouts">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="/admin/users/show">
-                        <span class="sub-item">Danh sách tài khoản</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="icon-menu.html">
-                        <span class="sub-item">Icon Menu</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#forms">
-                  <i class="fas fas fa-user-graduate"></i>
-                  <p>Quản lý sinh viên</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="forms">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="forms/forms.html">
-                        <span class="sub-item">Basic Form</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#tables">
-                  <i class="fas fa-book"></i>
-                  <p>Quản lý đề tài</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="tables">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="tables/tables.html">
-                        <span class="sub-item">Basic Table</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="tables/datatables.html">
-                        <span class="sub-item">Datatables</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#maps">
-                  <i class="fas fa-tasks"></i>
-                  <p>Phân đề tài đồ án</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="maps">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="maps/googlemaps.html">
-                        <span class="sub-item">Google Maps</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="maps/jsvectormap.html">
-                        <span class="sub-item">Jsvectormap</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#charts">
-                  <i class="far fa-chart-bar"></i>
-                  <p>Đánh giá đồ án</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="charts">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="charts/charts.html">
-                        <span class="sub-item">Chart Js</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="charts/sparkline.html">
-                        <span class="sub-item">Sparkline</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a href="widgets.html">
-                  <i class="fas fa-desktop"></i>
-                  <p>Báo cáo & Thống kê</p>
-                  <span class="badge badge-success">4</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#profile">
-                  <i class="fas fa-user"></i>
-                  <p>Hồ sơ cá nhân</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="profile">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="/auth/login">
-                        <i class="icon-login"></i>
-                        <p>Đăng nhập</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/auth/register">
-                        <i class="icon-direction"></i>
-                        <p>Đăng ký</p>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
+            </li>
+            <li class="nav-section">
+              <span class="sidebar-mini-icon">
+                <i class="fa fa-ellipsis-h"></i>
+              </span>
+              <h4 class="text-section">Các thành phần</h4>
+            </li>
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#sidebarLayouts">
+                <i class="fas fa-th-list"></i>
+                <p>Quản lý trang Admin</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="sidebarLayouts">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="/admin/users/show">
+                      <span class="sub-item">Danh sách tài khoản</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/admin/institutes/show">
+                      <span class="sub-item">Danh sách Viện & Khoa</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/admin/faculties/show">
+                      <span class="sub-item">Danh sách Khoa</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/admin/majors/show">
+                      <span class="sub-item">Danh sách chuyên ngành</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/admin/classes/show">
+                      <span class="sub-item">Danh sách lớp biên chế</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <!-- Danh sách khoa & Viện -->
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#base">
+                <i class="fas fa-layer-group"></i>
+                <p>Quản lý Khoa & Viện</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="base">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="/institutes/show">
+                      <span class="sub-item">Danh sách các Viện & Khoa</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/majors/show">
+                      <span class="sub-item">Danh sách chuyên ngành</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#forms">
+                <i class="fas fas fa-user-graduate"></i>
+                <p>Quản lý sinh viên</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="forms">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="/majors/showClass">
+                      <span class="sub-item">Danh sách lớp biên chế</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#tables">
+                <i class="fas fa-book"></i>
+                <p>Quản lý đề tài</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="tables">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="tables/tables.html">
+                      <span class="sub-item">Basic Table</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="tables/datatables.html">
+                      <span class="sub-item">Datatables</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#maps">
+                <i class="fas fa-tasks"></i>
+                <p>Phân đề tài đồ án</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="maps">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="maps/googlemaps.html">
+                      <span class="sub-item">Google Maps</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="maps/jsvectormap.html">
+                      <span class="sub-item">Jsvectormap</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#charts">
+                <i class="far fa-chart-bar"></i>
+                <p>Đánh giá đồ án</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="charts">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="charts/charts.html">
+                      <span class="sub-item">Chart Js</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="charts/sparkline.html">
+                      <span class="sub-item">Sparkline</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="widgets.html">
+                <i class="fas fa-desktop"></i>
+                <p>Báo cáo & Thống kê</p>
+                <span class="badge badge-success">4</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a data-bs-toggle="collapse" href="#profile">
+                <i class="fas fa-user"></i>
+                <p>Hồ sơ cá nhân</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="profile">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="/auth/login">
+                      <i class="icon-login"></i>
+                      <p>Đăng nhập</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/auth/register">
+                      <i class="icon-direction"></i>
+                      <p>Đăng ký</p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
-      <!-- End Sidebar -->
-
-      <div class="main-panel">
-        {{> header }}
-
-          {{{body}}}
-
-        {{> footer }}
-      </div>
-
-      <!-- Custom template | don't include it in your project! -->
-      <div class="custom-template">
-        <div class="title">Settings</div>
-        <div class="custom-content">
-          <div class="switcher">
-            <div class="switch-block">
-              <h4>Logo Header</h4>
-              <div class="btnSwitch">
-                <button
-                  type="button"
-                  class="selected changeLogoHeaderColor"
-                  data-color="dark"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="blue"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="purple"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="light-blue"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="green"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="orange"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="red"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="white"
-                ></button>
-                <br />
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="dark2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="blue2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="purple2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="light-blue2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="green2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="orange2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="red2"
-                ></button>
-              </div>
-            </div>
-            <div class="switch-block">
-              <h4>Navbar Header</h4>
-              <div class="btnSwitch">
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="dark"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="blue"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="purple"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="light-blue"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="green"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="orange"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="red"
-                ></button>
-                <button
-                  type="button"
-                  class="selected changeTopBarColor"
-                  data-color="white"
-                ></button>
-                <br />
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="dark2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="blue2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="purple2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="light-blue2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="green2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="orange2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="red2"
-                ></button>
-              </div>
-            </div>
-            <div class="switch-block">
-              <h4>Sidebar</h4>
-              <div class="btnSwitch">
-                <button
-                  type="button"
-                  class="changeSideBarColor"
-                  data-color="white"
-                ></button>
-                <button
-                  type="button"
-                  class="selected changeSideBarColor"
-                  data-color="dark"
-                ></button>
-                <button
-                  type="button"
-                  class="changeSideBarColor"
-                  data-color="dark2"
-                ></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="custom-toggle">
-          <i class="icon-settings"></i>
-        </div>
-      </div>
-      <!-- End Custom template -->
     </div>
-    <!--   Core JS Files   -->
-    <script src="/assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="/assets/js/core/popper.min.js"></script>
-    <script src="/assets/js/core/bootstrap.min.js"></script>
+    <!-- End Sidebar -->
 
-    <!-- jQuery Scrollbar -->
-    <script src="/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <div class="main-panel">
+      {{> header }}
 
-    <!-- Chart JS -->
-    <script src="/assets/js/plugin/chart.js/chart.min.js"></script>
+      {{{body}}}
 
-    <!-- jQuery Sparkline -->
-    <script src="/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+      {{> footer }}
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="/assets/js/core/jquery-3.7.1.min.js"></script>
+  <script src="/assets/js/core/popper.min.js"></script>
+  <script src="/assets/js/core/bootstrap.min.js"></script>
 
-    <!-- Chart Circle -->
-    <script src="/assets/js/plugin/chart-circle/circles.min.js"></script>
+  <script src="/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="/assets/js/plugin/chart.js/chart.min.js"></script>
+  <script src="/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+  <script src="/assets/js/plugin/chart-circle/circles.min.js"></script>
+  <script src="/assets/js/plugin/datatables/datatables.min.js"></script>
+  <script src="/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+  <script src="/assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+  <script src="/assets/js/plugin/jsvectormap/world.js"></script>
+  <script src="/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+  <script src="/assets/js/kaiadmin.min.js"></script>
+  <script src="/assets/js/setting-demo.js"></script>
+  <script src="/assets/js/demo.js"></script>
+  <script>
+    $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+      type: "line",
+      height: "70",
+      width: "100%",
+      lineWidth: "2",
+      lineColor: "#177dff",
+      fillColor: "rgba(23, 125, 255, 0.14)",
+    });
 
-    <!-- Datatables -->
-    <script src="/assets/js/plugin/datatables/datatables.min.js"></script>
+    $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+      type: "line",
+      height: "70",
+      width: "100%",
+      lineWidth: "2",
+      lineColor: "#f3545d",
+      fillColor: "rgba(243, 84, 93, .14)",
+    });
 
-    <!-- Bootstrap Notify -->
-    <script src="/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+    $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+      type: "line",
+      height: "70",
+      width: "100%",
+      lineWidth: "2",
+      lineColor: "#ffa534",
+      fillColor: "rgba(255, 165, 52, .14)",
+    });
+  </script>
+</body>
 
-    <!-- jQuery Vector Maps -->
-    <script src="/assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
-    <script src="/assets/js/plugin/jsvectormap/world.js"></script>
-
-    <!-- Sweet Alert -->
-    <script src="/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
-
-    <!-- Kaiadmin JS -->
-    <script src="/assets/js/kaiadmin.min.js"></script>
-
-    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="/assets/js/setting-demo.js"></script>
-    <script src="/assets/js/demo.js"></script>
-    <script>
-      $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#177dff",
-        fillColor: "rgba(23, 125, 255, 0.14)",
-      });
-
-      $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#f3545d",
-        fillColor: "rgba(243, 84, 93, .14)",
-      });
-
-      $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
-        type: "line",
-        height: "70",
-        width: "100%",
-        lineWidth: "2",
-        lineColor: "#ffa534",
-        fillColor: "rgba(255, 165, 52, .14)",
-      });
-    </script>
-  </body>
 </html>

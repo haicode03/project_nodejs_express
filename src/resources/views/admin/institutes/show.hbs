@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="page-inner">
+    <div class="page-header">
+      <h3 class="fw-bold mb-3">Quản lý Khoa & Viện</h3>
+      <ul class="breadcrumbs mb-3">
+        <li class="nav-home">
+          <a href="/">
+            <i class="icon-home"></i>
+          </a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+        <li class="nav-item">
+          <a href="/admin/institutes/show">Danh sách Khoa & Viện</a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+        {{!-- <li class="nav-item">
+          <a href="#">Basic Tables</a>
+        </li> --}}
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="card-title">Danh sách Khoa & Viện</div>
+            <a href="/admin/institutes/create" type="button" class="btn btn-success">Thêm thông tin</a>
+          </div>
+          <!-- SweetAlert JS -->
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          <script>
+              // Kiểm tra nếu có thông báo thành công
+              const successMessage = '{{successMessage}}';
+              const errorMessage = '{{errorMessage}}';
+
+              if (successMessage) {
+                  Swal.fire({
+                      icon: 'success',
+                      title: 'Thành công',
+                      text: successMessage,
+                  });
+              }
+
+              if (errorMessage) {
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Lỗi',
+                      text: errorMessage,
+                  });
+              }
+          </script>
+          <div class="card-body">
+            <table class="table table-head-bg-primary table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Tên Khoa & Viện</th>
+                  <th scope="col">Trưởng Khoa & Viện</th>
+                  <th scope="col">Email</th>
+                  {{!-- <th scope="col">Số điện thoại</th> --}}
+                  <th scope="col">Chức năng</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {{#each institutes}}
+                <tr>
+                  <th scope="row">{{sum @index 1}}</th>
+                  <td>{{this.name}}</td>
+                  <td>{{this.dean}}</td>
+                  <td>{{this.email}}</td>
+                  {{!-- <td>{{this.phone}}</td> --}}
+                  <td>
+                    <a href="/admin/institutes/{{this._id}}/edit" class="btn btn-info">Sửa</a>
+                    <a class="btn btn-danger" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#delete-course-modal">Xóa</a>
+                </td>
+                </tr>
+                 {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Confirm delete course --}}
+<div class="modal fade" id="delete-course-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa thông tin khoa & viện?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn chắc chắn muốn xóa không?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button id="btn-delete-course" type="button" class="btn btn-danger">Xóa bỏ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete hidden form --}}
+<form name="delete-course-form" method="POST"></form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var userId;
+        var deleteForm = document.forms['delete-course-form'];
+        var btnDeleteUser = document.getElementById('btn-delete-course');
+
+        // When dialog confirm clicked
+        $('#delete-course-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            userId = button.data('id');
+        });
+        
+        // When delete course btn clicked
+        btnDeleteUser.onclick = function () {
+            deleteForm.action = '/admin/institutes/' + userId + '?_method=DELETE';
+            deleteForm.submit();
+        }
+    });
+</script>

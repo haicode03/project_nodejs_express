@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="page-inner">
+    <div class="page-header">
+      <h3 class="fw-bold mb-3">Quản lý Viện & Khoa</h3>
+      <ul class="breadcrumbs mb-3">
+        <li class="nav-home">
+          <a href="/">
+            <i class="icon-home"></i>
+          </a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+        <li class="nav-item">
+          <a href="#">Chỉnh sửa thông tin</a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Chỉnh sửa thông tin</div>
+          </div>
+          <div class="card-body">
+            <form class="mt-4" method="POST" action="/admin/institutes/{{institute._id}}?_method=PUT">
+              <div class="form-group">
+                <label for="name">Tên Khoa & Viện</label>
+                <input type="text" class="form-control" value="{{institute.name}}" id="name" name="name">
+              </div>
+              <div class="form-group">
+                <label label for="dean">Trưởng Viện & Khoa</label>
+                <input type="text" class="form-control" value="{{institute.dean}}" id="dean" name="dean">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" value="{{institute.email}}" id="email" name="email">
+              </div>
+              <div class="form-group">
+                <label label for="phone">Số điện thoại</label>
+                <input type="text" class="form-control" value="{{institute.phone}}" id="phone" name="phone">
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success">Lưu lại</button>
+                <a href="/admin/users/show" class="btn btn-warning">Quay lại</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

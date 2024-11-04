@@ -1,15 +1,9 @@
-const jwt = require('jsonwebtoken');
-
-const verifyToken = (req, res, next) => {
-    const token = req.cookies.token;
-    if (!token) {
-        return res.status(403).send('Access denied.');
+function isAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
     }
-    jwt.verify(token, 'secretkey', (err, decoded) => {
-        if (err) return res.status(403).send('Invalid token.');
-        req.user = decoded;
-        next();
-    });
-};
+    res.redirect('/auth/login'); // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+}
 
-module.exports = { verifyToken };
+module.exports = isAuthenticated;
+

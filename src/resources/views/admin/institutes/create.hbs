@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="page-inner">
+    <div class="page-header">
+      <h3 class="fw-bold mb-3">Quản lý Khoa & Viện</h3>
+      <ul class="breadcrumbs mb-3">
+        <li class="nav-home">
+          <a href="/">
+            <i class="icon-home"></i>
+          </a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+        <li class="nav-item">
+          <a href="#">Thêm thông tin</a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Thêm thông tin khoa & viện</div>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="/admin/institutes/store">
+                <div class="form-group">
+                    <label for="code">Mã Khoa & Viện</label>
+                    <input type="text" class="form-control" id="code" name="code">
+                </div>
+                <div class="form-group">
+                    <label for="name">Tên Khoa & Viện</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="dean">Trưởng Khoa & Viện</label>
+                    <input type="text" class="form-control" id="dean" name="dean">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" id="phone" name="phone" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-success">Thêm</button>
+                  <a href="/admin/institutes/show" class="btn btn-warning">Quay lại</a>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="page-inner">
+    <div class="page-header">
+      <h3 class="fw-bold mb-3">Quản lý Khoa & Viện</h3>
+      <ul class="breadcrumbs mb-3">
+        <li class="nav-home">
+          <a href="/">
+            <i class="icon-home"></i>
+          </a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+        <li class="nav-item">
+          <a href="#">Thêm thông tin</a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Thêm thông tin khoa & viện</div>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="/admin/institutes/store">
+                <div class="form-group">
+                    <label for="name">Tên Khoa & Viện</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" class="form-control form-control-lg" required />
+                </div>
+                <div class="form-group">
+                    <label for="password">Nhập lại mật khẩu</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control form-control-lg" required />
+                </div>
+                <div class="form-group mb-4">
+                      <select style="background-color: #6e838a;" class="form-select-lg" id="role" name="role" required>
+                          <option style="background-color: #7e979e;" value="" disabled selected>Chức vụ</option>
+                          <option style="background-color: #7e979e;" value="teacher">Giảng viên</option>
+                          <option style="background-color: #7e979e;" value="student">Sinh viên</option>
+                      </select>
+                  </div>
+                
+                <button type="submit" class="btn btn-success">Thêm</button>
+                <a href="/admin/users/show" class="btn btn-warning">Quay lại</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

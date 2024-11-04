@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="page-inner">
+    <div class="page-header">
+      <h3 class="fw-bold mb-3">Quản lý lớp biên chế</h3>
+      <ul class="breadcrumbs mb-3">
+        <li class="nav-home">
+          <a href="/">
+            <i class="icon-home"></i>
+          </a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+        <li class="nav-item">
+          <a href="#">Thêm thông tin</a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Thêm thông tin lớp biên chế</div>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="/admin/classes/store">
+                <div class="form-group">
+                    <label for="name">Tên Lớp</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <select type="text" id="major_id" name="major_id" class="form-control">
+                      <option value="1">Chuyên ngành</option>
+                      <option value="2">Công nghệ thông tin</option>
+                      <option value="3">Kỹ thuật phần mềm</option>
+                      <option value="4">Chuyên ngành</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="code">Mã lớp</label>
+                    <input type="text" id="code" name="code" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="academic_year">Khóa học</label>
+                    <input type="text" id="academic_year" name="academic_year" class="form-control" />
+                </div>                
+                <button type="submit" class="btn btn-success">Thêm</button>
+                <a href="/admin/classes/show" class="btn btn-warning">Quay lại</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
