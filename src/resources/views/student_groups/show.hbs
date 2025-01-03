@@ -1,0 +1,163 @@
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Danh sách nhóm sinh viên của {{students.name}}</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="/">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/majors/show">Danh sách ngành</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/">Danh sách lớp</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <div class="d-flex gap-2">
+                            <select class="form-select form-select-sm" aria-label="Select menu 1">
+                                <option selected>Chọn lớp học phần</option>
+                                {{#each student_groups}}
+                                <option value="{{this._id}}">{{this.class_id.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="ms-auto d-flex gap-2">
+                            <a href="/student_groups/create" type="button" class="btn btn-success">Thêm nhóm sinh
+                                viên</a>
+                            <a href="#" type="button" class="btn btn-danger">Import</a>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="basic-datatables" class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Lớp học phần</th>
+                                        <th>Tên nhóm</th>
+                                        <th>Nhóm sinh viên</th>
+                                        <th>Tên đề tài</th>
+                                        <th>Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each student_groups}}
+                                    <tr>
+                                        <th scope="row">{{sum @index 1}}</th>
+                                        <td>{{ this.class_id.name }}</td>
+                                        <td>{{ this.name }}</td>
+                                        <td>
+                                            {{#each this.members}}
+                                            <div>{{ this.name }}</div>
+                                            {{/each}}
+                                        </td>
+                                        <td>
+                                            {{#if this.topic_id}}
+                                                <span style="color: rgb(105, 131, 43);">{{this.topic_id.name}}</span>
+                                            {{else}}
+                                                <button class="btn btn-warning" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#add-topic-modal">
+                                                    Thêm đề tài
+                                                </button>
+                                            {{/if}}
+                                        </td>
+                                        <td>
+                                            <a href="/student_groups/{{this._id}}/edit" class="btn btn-info">Đổi đề tài</a>
+                                            <a href="/projects/show" class="btn btn-dark">Xem</a>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add-topic-modal" tabindex="-1" aria-labelledby="addTopicLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addTopicLabel">Thêm đề tài cho nhóm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-topic-form" method="POST">
+                    <input type="hidden" name="group_id" id="group_id">
+                    <div class="form-group">
+                        <label for="topic_id">Chọn đề tài</label>
+                        <select class="form-select" id="topic_id" name="topic_id">
+                            <option value="">Nhập đề tài mới</option>
+                            {{#each topics}}
+                            <option value="{{this._id}}">{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="new_topic">Hoặc nhập đề tài mới</label>
+                        <input type="text" class="form-control" id="new_topic" name="new_topic" placeholder="Nhập tên đề tài mới">
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-success">Lưu</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const addTopicForm = document.getElementById('add-topic-form');
+    const groupIdInput = document.getElementById('group_id');
+
+    $('#add-topic-modal').on('show.bs.modal', function (event) {
+        const button = $(event.relatedTarget);
+        const groupId = button.data('id');
+        groupIdInput.value = groupId; // Gán group_id vào input ẩn
+    });
+
+    addTopicForm.onsubmit = function (e) {
+        e.preventDefault();
+        const groupId = groupIdInput.value;
+        const topicId = document.getElementById('topic_id').value;
+        const newTopic = document.getElementById('new_topic').value;
+
+        fetch(`/student_groups/${groupId}/add-topic`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ topic_id: topicId, new_topic: newTopic }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    alert('Thêm đề tài thành công!');
+                    location.reload();
+                } else {
+                    alert(data.message || 'Có lỗi xảy ra!');
+                }
+            });
+    };
+});
+</script>

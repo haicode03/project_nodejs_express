@@ -1,7 +1,7 @@
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Danh sách Sinh viên của lớp {{class.name}}</h3>
+            <h3 class="fw-bold mb-3">{{className}}</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
                     <a href="/">
@@ -12,13 +12,13 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="/classes/show">Danh sách lớp</a>
+                    <a href="/majors/show">Danh sách ngành</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="/students/show">Danh sách sinh viên</a>
+                    <a href="/">Danh sách lớp</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
@@ -27,21 +27,173 @@
         </div>
 
         <div class="row">
-            {{#each students}}
-            <div class="col-md-4">
-                <div class="card card-secondary">
-                    <div class="card-body skew-shadow">
-                        <h2>
-                            <a class="hover-name" href="/students/{{this.slug}}">{{this.name}}</a>
-                        </h2>
-                        <p style="color: rgb(228, 188, 12);" class="op-8">MSSV: {{this.studentID}}</p>
-                        <div class="pull-right">
-                            <h3 class="fw-bold op-8">{{this.email}}</h3>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="card-title">Danh sách sinh viên lớp <a style="color: crimson;">{{ className }}</a>
+                        </div>
+                        <div class="ms-auto">
+                            <button type="submit" class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#groupModal">Gộp nhóm</button>
+                            <a href="/students/create" type="button" class="btn btn-success">Thêm sinh viên</a>
+                            <a href="#" type="button" class="btn btn-warning">Import</a>
+                        </div>
+                    </div>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const successMessage = '{{successMessage}}';
+        const errorMessage = '{{errorMessage}}';
+
+        if (successMessage) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công',
+                text: successMessage,
+            });
+        }
+
+        if (errorMessage) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                text: errorMessage,
+            });
+        }
+    });
+</script>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <form id="groupForm" method="POST" action="/students/groups">
+                                <table id="basic-datatables" class="display table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Tên sinh viên</th>
+                                            <th>Mã sinh viên</th>
+                                            <th>Ngày sinh</th>
+                                            <th>Chọn</th>
+                                            <th>Chức năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each students}}
+                                        <tr>
+                                            <th scope="row">{{sum @index 1}}</th>
+                                            <td style="font-size: 16px; color:rgb(4, 52, 105)">{{ this.name }}</td>
+                                            <td>{{ this.student_code }}</td>
+                                            <td>{{formatDate this.dob }}</td>
+                                            <td>
+                                                <input type="checkbox" class="form-check-input" name="members[]" value="{{this._id}}">
+                                            </td>
+                                            <td>
+                                                <a href="/students/{{this._id}}/edit" class="btn btn-info">Sửa</a>
+                                                <a class="btn btn-danger" data-bs-toggle="modal" data-id="{{this._id}}"
+                                                    data-bs-target="#delete-course-modal">Xóa</a>
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </form>
+
                         </div>
                     </div>
                 </div>
             </div>
-            {{/each}}
         </div>
     </div>
 </div>
+
+<script>
+    function prepareGroupData() {
+        const checkboxes = document.querySelectorAll('#groupForm input[name="members[]"]:checked');
+        
+        if (checkboxes.length === 0) {
+            alert('Vui lòng chọn ít nhất một sinh viên!');
+            return false;
+        }
+
+        const createGroupForm = document.getElementById('createGroupForm');
+
+        createGroupForm.querySelectorAll('input[name="members[]"]').forEach(input => input.remove());
+
+        checkboxes.forEach(checkbox => {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'members[]';
+            hiddenInput.value = checkbox.value;
+            createGroupForm.appendChild(hiddenInput);
+        });
+        return true;
+    }
+</script>
+
+<!-- Modal for creating group -->
+<div class="modal fade" id="groupModal" tabindex="-1" aria-labelledby="groupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="createGroupForm" method="POST" action="/students/groups" onsubmit="return prepareGroupData()">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="groupModalLabel">Tạo nhóm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="groupName" class="form-label">Tên nhóm</label>
+                        <input type="text" class="form-control" id="groupName" name="name" required>
+                    </div>
+                    <input type="hidden" name="class_id" value="{{className}}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Tạo nhóm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{{!-- Confirm delete course --}}
+<div class="modal fade" id="delete-course-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa sinh viên?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn chắc chắn muốn xóa sinh viên này này?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button id="btn-delete-course" type="button" class="btn btn-danger">Xóa bỏ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Delete hidden form --}}
+<form name="delete-course-form" method="POST"></form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var userId;
+        var deleteForm = document.forms['delete-course-form'];
+        var btnDeleteUser = document.getElementById('btn-delete-course');
+
+        // When dialog confirm clicked
+        $('#delete-course-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            studentId = button.data('id');
+        });
+
+        // When delete course btn clicked
+        btnDeleteUser.onclick = function () {
+            deleteForm.action = '/students/' + studentId + '?_method=DELETE';
+            deleteForm.submit();
+        }
+    });
+</script>

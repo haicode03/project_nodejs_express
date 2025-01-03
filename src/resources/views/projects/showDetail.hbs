@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="page-inner">
+        <h3>Chi tiết Dự Án</h3>
+        <div class="board bg-light p-4">
+            <!-- Thông tin chung -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <strong>Thông tin chung</strong>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Tên đề tài:</strong> {{project.title}}</p>
+                            <p><strong>Mô tả:</strong> {{project.description}}</p>
+                            <p><strong>Ngày bắt đầu:</strong> {{formatDate project.startDate}}</p>
+                            <p><strong>Hạn chót:</strong> {{formatDate project.deadline}}</p>
+                            <p><strong>Trạng thái:</strong> {{project.status}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <strong>Thông tin nhóm</strong>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Tên nhóm:</strong> {{project.student_group.name}}</p>
+                            <p><strong>Lớp:</strong> {{project.student_group.class_id.name}}</p>
+                            <ul>
+                                {{#each project.student_group.members}}
+                                <li>{{this.name}}</li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Danh sách công việc -->
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <strong>Công việc</strong>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                {{#each project.tasks}}
+                                <li class="list-group-item">
+                                    <strong>{{this.title}}</strong>: {{this.description}}
+                                    <br>
+                                    <small>Trạng thái: {{this.status}} - Hạn chót: {{formatDate this.deadline}}</small>
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

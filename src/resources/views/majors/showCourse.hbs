@@ -1,7 +1,7 @@
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
-            <h3 class="fw-bold mb-3">Danh sách lớp học phần {{courseName}}</h3>
+            <h3 class="fw-bold mb-3">Danh sách học phần</h3>
             <ul class="breadcrumbs mb-3">
                 <li class="nav-home">
                     <a href="/">
@@ -18,7 +18,7 @@
                     <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                    <a href="/classes/show">Danh sách lớp học phần</a>
+                    <a href="/majors/showCoures">Danh sách học phần</a>
                 </li>
                 <li class="separator">
                     <i class="icon-arrow-right"></i>
@@ -30,36 +30,38 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <div class="card-title">Danh sách lớp học phần</div>
+                        <div class="card-title">Danh sách học phần</div>
                         <div class="ms-auto">
-                            <a href="/classes/create" type="button" class="btn btn-success">Thêm lớp học phần</a>
-                            <a href="/classes/import" type="button" class="btn btn-warning">Import</a>
+                            <a href="/courses/create" type="button" class="btn btn-success">Thêm học phần</a>
+                            <a href="#" type="button" class="btn btn-warning">Import</a>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="card-sub">
-                            Lớp biên chế được phân theo học phần
+                            Học phần của chuyên ngành
                         </div>
                         <table class="table table-striped mt-3">
                             <thead>
                                 <tr>
                                     <th scope="col">STT</th>
-                                    <th scope="col">Tên lớp</th>
-                                    <th scope="col">Phòng học</th>
+                                    <th scope="col">Mã học phần</th>
+                                    <th scope="col">Tên học phần</th>
+                                    <th scope="col">Số tín chỉ</th>
                                     <th scope="col">Giảng viên</th>
-                                    <th scope="col">Xem chi tiết</th>
+                                    <th scope="col">Lớp học phần</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{#each classes}}
+                                {{#each courses}}
                                 <tr>
                                     <th scope="row">{{sum @index 1}}</th>
+                                    <td>{{ this.code }}</td>
                                     <td>{{ this.name }}</td>
-                                    <td>{{ this.room }}</td>
-                                    <td>{{ this.course_id.teacher }}</td>
+                                    <td>{{ this.credit }}</td>
+                                    <td>{{ this.teacher }}</td>
                                     <td>
-                                        <a href="/students/{{ this._id }}" type="button" class="btn btn-info">
-                                            Xem danh sách
+                                        <a href="/majors/showClass/{{this._id}}" type="button" class="btn btn-info">
+                                            Truy cập
                                         </a>
                                     </td>
                                 </tr>

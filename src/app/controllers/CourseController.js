@@ -1,5 +1,7 @@
 const Course = require('../models/Course');
+const Major = require('../models/Major');
 const { mongooseToObject } = require('../../util/mongoose');
+const { mutipleMongooseToObject } = require('../../util/mongoose');
 
 class CourseController {
     // Hiển thị chi tiết khóa học
@@ -13,22 +15,26 @@ class CourseController {
             .catch(next);
     }
 
-    // Tạo khóa học mới
-    create(req, res) {
-        res.render('courses/create');
-        
+    // Thêm học phần mới
+    create(req, res, next) {
+        Major.find({})
+            .then((majors) => {
+                res.render('courses/create', {
+                    majors: mutipleMongooseToObject(majors),
+                });
+            })
+            .catch(next);
     }
-
-    // Lưu khóa học vào cơ sở dữ liệu
+    
+    // Lưu thông tin học phần
     store(req, res, next) {
-        req.body.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
-        const course = new Course(req.body);
-        course.save()
-            .then(() => res.redirect('/me/stored/courses'))
+        const courses = new Course(req.body);
+        courses.save()
+            .then(() => res.redirect('/majors/showCourse'))
             .catch(next);
     }
 
-    // Chỉnh sửa khóa học
+    // Chỉnh sửa học phần
     edit(req, res, next) {
         Course.findById(req.params.id)
             .then((course) =>
@@ -39,21 +45,21 @@ class CourseController {
             .catch(next);
     }
 
-    // Cập nhật khóa học
+    // Cập nhật học phần
     update(req, res, next) {
         Course.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/me/stored/courses'))
             .catch(next);
     }
 
-    // Xóa khóa học tạm thời
+    // Xóa học phần tạm thời
     destroy(req, res, next) {
         Course.delete({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
     }
 
-    // Xóa vĩnh viễn khóa học
+    // Xóa vĩnh viễn học phần
     forceDestroy(req, res, next) {
         Course.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))

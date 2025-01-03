@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Danh sách đề tài</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="/">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/topics/show">Danh sách đề tài</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="card-title">Danh sách đề tài <a style="color: crimson;">{{ className }}</a></div>
+                        <div class="ms-auto">
+                            <a href="/topics/create" type="button" class="btn btn-success">Thêm đề tài</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="basic-datatables" class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Tên đề tài</th>
+                                        <th>Mô tả</th>
+                                        <th>Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each topics}}
+                                    <tr>
+                                        <th scope="row">{{sum @index 1}}</th>
+                                        <td style="font-size: 16px; color:rgb(4, 52, 105)">{{ this.name }}</td>
+                                        <td  class="text-truncate" style="max-width: 300px;" title="{{ this.description }}">{{ this.description }}</td>
+                                        <td>
+                                            <a href="/topics/{{this._id}}/edit" class="btn btn-info">Sửa</a>
+                                            <a class="btn btn-danger" data-bs-toggle="modal" data-id="{{this._id}}" data-bs-target="#delete-course-modal">Xóa</a>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Confirm delete course --}}
+<div class="modal fade" id="delete-course-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa đề tài?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn chắc chắn muốn xóa đề tài này không?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button id="btn-delete-course" type="button" class="btn btn-danger">Xóa bỏ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete hidden form --}}
+<form name="delete-course-form" method="POST"></form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var topicId;
+        var deleteForm = document.forms['delete-course-form'];
+        var btnDeleteTopic = document.getElementById('btn-delete-course');
+
+        // Khi modal hiện ra, lấy ID của đề tài cần xóa
+        $('#delete-course-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            topicId = button.data('id'); // Lấy giá trị data-id từ nút "Xóa"
+        });
+
+        // Khi nhấn nút xác nhận xóa
+        btnDeleteTopic.onclick = function () {
+            deleteForm.action = '/topics/' + topicId + '?_method=DELETE'; // Đường dẫn đến API DELETE
+            deleteForm.submit(); // Gửi form
+        };
+    });
+</script>

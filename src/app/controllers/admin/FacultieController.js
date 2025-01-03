@@ -7,6 +7,7 @@ class adminFacultieController {
     // Hiển thị danh sách
     show(req, res, next) {
         Facultie.find({})
+            .populate('instituteId', 'name') // Sử dụng populate
             .then((faculties) => {
                 res.render('admin/faculties/show', {
                     faculties: mutipleMongooseToObject(faculties),

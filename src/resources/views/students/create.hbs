@@ -1,7 +1,7 @@
 <div class="container">
   <div class="page-inner">
     <div class="page-header">
-      <h3 class="fw-bold mb-3">Danh sách học phần</h3>
+      <h3 class="fw-bold mb-3">Danh sách sinh viên</h3>
       <ul class="breadcrumbs mb-3">
         <li class="nav-home">
           <a href="/">
@@ -23,37 +23,41 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">Thêm thông tin học phần</div>
+            <div class="card-title">Thêm thông tin sinh viên</div>
           </div>
           <div class="card-body">
-            <form method="POST" action="/courses/store">
+            <form method="POST" action="/students/store">
               <div class="form-group">
-                <label for="major_id">Chuyên ngành</label>
-                <select class="form-control" id="major_id" name="major_id">
-                  {{#each majors}}
+                <label for="class_id">Lớp học phần</label>
+                <select class="form-control" id="class_id" name="class_id">
+                  {{#each classes}}
                   <option value="{{this._id}}">{{this.name}}</option>
                   {{/each}}
                 </select>
               </div>
               <div class="form-group">
-                <label for="code">Mã học phần</label>
-                <input type="text" class="form-control" id="code" name="code">
-              </div>
-              <div class="form-group">
-                <label for="name">Tên học phần</label>
+                <label for="name">Tên sinh viên</label>
                 <input type="text" class="form-control" id="name" name="name">
               </div>
               <div class="form-group">
-                <label for="credit">Số tín chỉ</label>
-                <input type="text" class="form-control" id="credit" name="credit">
+                <label for="student_code">Mã sinh viên</label>
+                <input type="text" class="form-control" id="student_code" name="student_code">
               </div>
               <div class="form-group">
-                <label for="learn_week">Tuần học</label>
-                <input type="text" class="form-control" id="learn_week" name="learn_week">
+                <label for="dob">Ngày sinh</label>
+                <input type="text" class="form-control" id="dob" name="dob">
               </div>
               <div class="form-group">
-                <label for="teacher">Giảng viên</label>
-                <input type="text" class="form-control" id="teacher" name="teacher">
+                <label for="phone">Số điện thoại</label>
+                <input type="text" class="form-control" id="phone" name="phone">
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" name="email">
+              </div>
+              <div class="form-group">
+                <label for="address">Địa chỉ</label>
+                <input type="text" id="address" name="address" class="form-control" />
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-success">Lưu</button>

@@ -7,6 +7,7 @@ class adminClassController {
     // Hiển thị danh sách
     show(req, res, next) {
         Class.find({})
+            .populate('major_id', 'name') // Sử dụng populate
             .then((classes) => {
                 res.render('admin/classes/show', {
                     classes: mutipleMongooseToObject(classes),

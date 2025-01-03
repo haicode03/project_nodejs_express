@@ -12,7 +12,9 @@ router.patch('/:id/restore', majorController.restore);
 router.delete('/:id', majorController.destroy);
 router.delete('/:id/force', majorController.forceDestroy);
 //Hiển thị danh sách lớp biên chế theo ngành
-router.get('/showClass', majorController.showClass);
+router.get('/showClass/:id', majorController.showClass);
+router.get('/showCourse', majorController.showCourse);
 router.get('/:slug', majorController.show);
+
 
 module.exports = router;

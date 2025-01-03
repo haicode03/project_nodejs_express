@@ -6,10 +6,9 @@ const Schema = mongoose.Schema;
 
 const Class = new Schema(
     {
-        majorId: { type: Object  },
+        course_id: { type: Schema.Types.ObjectId, ref: 'Course' },
         name: { type: String, required: true },
-        code: { type: String },
-        academic_year: { type: String },
+        room: { type: String },
         slug: { type: String, slug: 'name', unique: true },
     },
     {

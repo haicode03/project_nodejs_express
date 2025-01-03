@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Quản lý dự án</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="/">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/projects/show">Danh sách dự án</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="card-title">Danh sách dự án</div>
+                        <div class="d-flex gap-2">
+                            <select class="form-select form-select-sm" aria-label="Select menu 1">
+                                <option selected>Chọn lớp học phần</option>
+                                {{#each student_groups}}
+                                <option value="{{this._id}}">{{this.class_id.name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="w-10 text-center">STT</th>
+                                        <th class="w-25">Tên nhóm</th>
+                                        <th class="w-50">Tên đề tài</th>
+                                        <th class="w-15 text-center">Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each student_groups}}
+                                    <tr>
+                                        <td class="text-center">{{sum @index 1}}</td>
+                                        <td>{{this.name}}</td>
+                                        <td class="text-truncate" style="max-width: 300px;">
+                                            {{#if this.topic_id}}
+                                                {{this.topic_id.name}}
+                                            {{else}}
+                                                <span class="text-muted">Chưa có đề tài</span>
+                                            {{/if}}
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="/projects/{{this._id}}/showDetail" class="btn btn-info">Xem chi tiết</a>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

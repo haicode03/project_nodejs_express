@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="page-inner">
+    <div class="page-header">
+      <h3 class="fw-bold mb-3">Danh sách đề tài</h3>
+      <ul class="breadcrumbs mb-3">
+        <li class="nav-home">
+          <a href="/">
+            <i class="icon-home"></i>
+          </a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+        <li class="nav-item">
+          <a href="#">Thêm thông tin</a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Thêm thông tin đề tài</div>
+          </div>
+          <div class="card-body">
+            <form method="POST" action="/topics/store">
+              <div class="form-group">
+                <label for="name">Tên đề tài</label>
+                <input type="text" class="form-control" id="name" name="name">
+              </div>
+              <div class="form-group">
+                <label for="description">Mô tả</label>
+                <input type="textarea" class="form-control" id="description" name="description">
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success">Lưu</button>
+                <a href="#" class="btn btn-warning">Quay lại</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Danh sách sinh viên đã bị xóa tạm thời</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="/">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="/students">Danh sách sinh viên</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">Sinh viên đã xóa</li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="card-title">Danh sách sinh viên đã bị xóa</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="basic-datatables" class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Tên sinh viên</th>
+                                        <th>Mã sinh viên</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each students}}
+                                    <tr>
+                                        <td>{{sum @index 1}}</td>
+                                        <td>{{this.name}}</td>
+                                        <td>{{this.student_code}}</td>
+                                        <td>{{formatDate this.dob}}</td>
+                                        <td>
+                                            <a href="/students/{{this._id}}/restore" class="btn btn-success">Khôi phục</a>
+                                            <button class="btn btn-danger" data-bs-toggle="modal"
+                                                data-id="{{this._id}}" data-bs-target="#delete-modal">
+                                                Xóa vĩnh viễn
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            <div class="form-group">
+                                <a href="/students/{{ this.class_id }}" class="btn btn-warning">Quay lại</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Xác nhận Xóa vĩnh viễn -->
+<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa vĩnh viễn</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn xóa vĩnh viễn sinh viên này không? Hành động này không thể hoàn tác!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button id="btn-confirm-delete" type="button" class="btn btn-danger">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Form ẩn dùng để gửi yêu cầu xóa -->
+<form id="delete-form" method="POST" style="display: none;">
+    <input type="hidden" name="_method" value="DELETE">
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let studentId;
+        const deleteForm = document.getElementById('delete-form');
+        const btnConfirmDelete = document.getElementById('btn-confirm-delete');
+
+        // Lấy ID của sinh viên khi mở modal
+        $('#delete-modal').on('show.bs.modal', function (event) {
+            const button = $(event.relatedTarget);
+            studentId = button.data('id');
+        });
+
+        // Xóa vĩnh viễn khi bấm nút xác nhận
+        btnConfirmDelete.addEventListener('click', () => {
+            deleteForm.action = `/students/${studentId}/force`;  // Cập nhật URL cho xóa vĩnh viễn
+            deleteForm.submit();
+        });
+    });
+</script>

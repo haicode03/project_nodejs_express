@@ -4,13 +4,15 @@ const mongooseDelete = require('mongoose-delete');
 
 const Schema = mongoose.Schema;
 
-const Facultie = new Schema(
+const Student = new Schema(
     {
+        class_id: { type: Schema.Types.ObjectId, ref: 'Class' },
+        student_code: { type: String, required: true },
         name: { type: String },
-        instituteId: { type: Schema.Types.ObjectId, ref: 'Institute' },
-        email: { type: String, required: true },
-        head: { type: String },
-        code: { type: String },
+        email: { type: String },
+        phone: { type: String },
+        dob: { type: Date },
+        address: { type: String },
         slug: { type: String, slug: 'name', unique: true },
     },
     {
@@ -20,9 +22,9 @@ const Facultie = new Schema(
 
 // Add plugins
 mongoose.plugin(slug);
-Facultie.plugin(mongooseDelete, {
+Student.plugin(mongooseDelete, {
     deletedAt: true,
     overrideMethods: 'all',
 });
 
-module.exports = mongoose.model('Facultie', Facultie);
+module.exports = mongoose.model('Student', Student);

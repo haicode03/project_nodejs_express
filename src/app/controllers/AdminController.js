@@ -78,25 +78,20 @@ class AdminController {
             .catch(next);
     }
 
-    // // Xóa tài khoản người dùng
-    // destroy(req, res, next) {
-    // User.deleteOne({ _id: req.params.id })
-    //     .then(() => {
-    //         return User.find({});
-    //     })
-    //     .then((users) => {
-    //         res.render('admin/users/show', {
-    //             users: mutipleMongooseToObject(users),
-    //             successMessage: 'Xóa tài khoản thành công!',
-    //             errorMessage: null,
-    //         });
-    //     })
-    //     .catch(next);
-    // }
+    // Xóa tài khoản người dùng
     destroy(req, res, next) {
-        User.deleteOne({ _id: req.params.id })
-            .then(() => res.redirect('back'))
-            .catch(next);
+    User.deleteOne({ _id: req.params.id })
+        .then(() => {
+            return User.find({});
+        })
+        .then((users) => {
+            res.render('admin/users/show', {
+                users: mutipleMongooseToObject(users),
+                successMessage: 'Xóa tài khoản thành công!',
+                errorMessage: null,
+            });
+        })
+        .catch(next);
     }
 
     // Xóa vĩnh viễn tài khoản

@@ -1,5 +1,6 @@
 const Major = require('../models/Major');
 const Class = require('../models/Class');
+const Course = require('../models/Course');
 const { mutipleMongooseToObject } = require('../../util/mongoose');
 const { mongooseToObject } = require('../../util/mongoose');
 
@@ -69,16 +70,30 @@ class MajorController {
             .catch(next);
     }
 
-    //Hiển thị danh sách lớp biên chế
+    // Hiển thị danh sách lớp theo học phần
     showClass(req, res, next) {
-        Class.find({})
-            .then((classes) => {
+        Class.find({ course_id: req.params.id })
+            .populate('course_id', 'teacher') // Sử dụng populate
+            .then((classes) =>
                 res.render('majors/showClass', {
                     classes: mutipleMongooseToObject(classes),
+                })
+            )
+            .catch(next);
+    }
+
+    //Hiển thị danh sách học phần theo chuyên ngành
+    showCourse(req, res, next) {
+        Course.find({})
+            .populate('major_id', 'name') // Sử dụng populate
+            .then((courses) => {
+                res.render('majors/showCourse', {
+                    courses: mutipleMongooseToObject(courses),
                 });
             })
             .catch(next);
     }
+
 }
 
 module.exports = new MajorController();
